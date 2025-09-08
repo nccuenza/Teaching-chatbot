@@ -1,6 +1,6 @@
 // --- IMPORTANT ---
 // When you deploy, change this URL to your live Render backend URL.
-const API_URL = 'http://localhost:3000/chat';
+const API_URL = 'https://water-cycle-chatbot.onrender.com';
 // Example Deployed URL: 'https://water-cycle-chatbot.onrender.com/chat'
 
 const chatBox = document.getElementById('chat-box');
