@@ -32,7 +32,7 @@ const chatbotPrompt = `
 // API endpoint for chat
 app.post('/chat', async (req, res) => {
     try {
-        const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+        const model = genAI.getGenerativeModel({ model: "gemini-1.0-flash" });
         const userMessage = req.body.message;
 
         const chat = model.startChat({
