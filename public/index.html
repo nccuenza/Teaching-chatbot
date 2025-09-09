@@ -3,21 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professor Aqua 💧 Water Cycle Chatbot</title>
+    <title>K-12 Teaching Assistant</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="chat-container">
-        <div id="chat-header">
-            <h2>Chat with Professor Aqua 🧑‍🏫</h2>
-        </div>
-        <div id="chat-box">
-        </div>
-        <form id="chat-form">
-            <input type="text" id="user-input" placeholder="Ask a question..." autocomplete="off" required>
-            <button type="submit">Send</button>
-        </form>
+    <div class="chat-container">
+        <header class="chat-header">
+            <h1>🎓 Teaching Assistant</h1>
+            <p>Your friendly AI partner for learning!</p>
+        </header>
+        
+        <main id="chat-window" class="chat-window">
+            <div class="message bot-message">
+                <span class="message-text">Hello! I'm here to help you learn. What topic are you curious about today?</span>
+            </div>
+        </main>
+        
+        <footer class="chat-input-area">
+            <div class="input-controls">
+                <label for="grade-level-select" class="visually-hidden">Select Grade Level</label>
+                <select id="grade-level-select" class="grade-level-select">
+                    <option value="k-2">Grades K-2</option>
+                    <option value="3-5">Grades 3-5</option>
+                    <option value="6-8" selected>Grades 6-8</option>
+                    <option value="9-12">Grades 9-12</option>
+                </select>
+                <input type="text" id="message-input" placeholder="Ask a question about science, math, or history..." autofocus>
+                <button id="send-button" aria-label="Send message">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                </button>
+            </div>
+        </footer>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
