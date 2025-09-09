@@ -64,6 +64,11 @@ function isContentAppropriate(text) {
 
 // API Routes
 app.post('/api/chat', async (req, res) => {
+  console.log('=== CHAT REQUEST RECEIVED ===');
+  console.log('Message:', req.body.message);
+  console.log('Grade Level:', req.body.gradeLevel);
+  console.log('Session ID:', req.body.sessionId);
+  console.log('=============================');
   try {
     const { message, gradeLevel = '6-8', sessionId } = req.body;
 
