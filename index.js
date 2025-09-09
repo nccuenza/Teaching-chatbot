@@ -40,8 +40,9 @@ async function generateTeachingResponse(question, gradeLevel, conversationHistor
     const config = GRADE_LEVELS[gradeLevel] || GRADE_LEVELS['6-8'];
     const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
-    // Construct a detailed prompt for the AI
-    const prompt = `You are a friendly and encouraging K-12 teaching assistant for the water cycle.
+    // Construct a more detailed prompt for the AI
+    const prompt = `You are a friendly and encouraging K-12 teaching assistant. 
+Your expertise includes Math, English, Science, Filipino, and Araling Panlipunan (AP).
 Your student is in grade level: ${gradeLevel}.
 Your response should be tailored to this level with a complexity of "${config.complexity}".
 Keep the response under ${config.maxWords} words.
@@ -70,7 +71,7 @@ Provide an educational, age-appropriate response:`;
  * @returns {boolean} True if the content is appropriate, otherwise false.
  */
 function isContentAppropriate(text) {
-  const inappropriateWords = ['violence', 'weapon', 'drug', 'porn']; // Add more words as needed
+  const inappropriateWords = ['violence', 'weapon', 'drug']; // Add more words as needed
   return !inappropriateWords.some(word => text.toLowerCase().includes(word));
 }
 
@@ -154,4 +155,5 @@ process.on('SIGTERM', () => {
   console.log('Server shutting down...');
   process.exit(0);
 });
+
 
