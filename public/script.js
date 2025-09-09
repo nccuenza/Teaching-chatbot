@@ -4,9 +4,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const messageInput = document.getElementById('message-input');
     const sendButton = document.getElementById('send-button');
     const gradeLevelSelect = document.getElementById('grade-level-select');
+    const newChatButton = document.getElementById('new-chat-button');
 
-    // Generate a simple unique session ID for the conversation
-    const sessionId = `session-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    let sessionId;
+
+    /**
+     * Starts a new chat session.
+     */
+    const startNewChat = () => {
+        // Generate a new unique session ID
+        sessionId = `session-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+        
+        // Clear the chat window
+        chatWindow.innerHTML = '';
+
+        // Add the initial welcome message
+        appendMessage("Hello! I'm here to help you learn. What topic are you curious about today?", 'bot');
+        
+        messageInput.focus();
+    };
 
     /**
      * Appends a message to the chat window.
@@ -73,12 +89,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Event Listeners
+    // --- Event Listeners ---
     sendButton.addEventListener('click', sendMessage);
+    
     messageInput.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {
             event.preventDefault(); // Prevents new line in input
             sendMessage();
         }
     });
+
+    newChatButton.addEventListener('click', startNewChat);
+
+    // --- Initial Setup ---
+    startNewChat(); // Start the first chat session on page load
 });
