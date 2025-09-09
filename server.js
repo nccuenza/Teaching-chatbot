@@ -3,6 +3,10 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 require('dotenv').config();
+// +++ Add these two lines +++
+const { GoogleGenerativeAI } = require('@google/generative-ai');
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+// +++++++++++++++++++++++++++++
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -23,37 +27,33 @@ const GRADE_LEVELS = {
   '9-12': { maxWords: 200, complexity: 'advanced', examples: false }
 };
 
-// Mock LLM function (replace with actual OpenAI/other LLM API)
+// Replace the entire old mock function with this new one
 async function generateTeachingResponse(question, gradeLevel, conversationHistory = []) {
-  const config = GRADE_LEVELS[gradeLevel] || GRADE_LEVELS['6-8'];
-  
-  // This is a simplified mock - replace with actual LLM API call
-  const prompt = `
-    You are a friendly K-12 teaching assistant. 
-    Grade Level: ${gradeLevel}
-    Complexity: ${config.complexity}
-    Max Response Length: ${config.maxWords} words
-    Include examples: ${config.examples}
-    
-    Student Question: ${question}
-    
-    Provide an educational, age-appropriate response. Be encouraging and clear.
-    ${config.examples ? 'Include simple examples when helpful.' : ''}
-  `;
+    const config = GRADE_LEVELS[gradeLevel] || GRADE_LEVELS['6-8'];
+    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
-  // Mock response based on common topics
-  const mockResponses = {
-    science: "Science is all about asking questions and finding answers! When you drop a ball, it falls down because of gravity - a force that pulls things toward Earth. Try dropping different objects and see what happens!",
-    math: "Math helps us solve problems every day! If you have 3 apples and eat 1, you have 2 left. That's subtraction: 3 - 1 = 2. Practice with objects around you!",
-    history: "History tells us stories about people who lived long ago. They built amazing things like pyramids and castles, and their discoveries help us today!",
-    default: "That's a great question! Learning happens when we're curious about the world around us. What specifically would you like to know more about?"
-  };
+    // Construct a more detailed prompt for the AI
+    const prompt = `You are a friendly and encouraging K-12 teaching assistant for the water cycle.
+Your student is in grade level: ${gradeLevel}.
+Your response should be tailored to this level with a complexity of "${config.complexity}".
+Keep the response under ${config.maxWords} words.
+${config.examples ? 'Use simple, relatable examples.' : 'Do not use complex examples.'}
+Previous conversation history is provided for context. Do not repeat answers.
 
-  const topic = question.toLowerCase().includes('science') ? 'science' :
-                question.toLowerCase().includes('math') ? 'math' :
-                question.toLowerCase().includes('history') ? 'history' : 'default';
+History: ${JSON.stringify(conversationHistory)}
+Student's Question: "${question}"
 
-  return mockResponses[topic];
+Provide an educational, age-appropriate response:`;
+
+    try {
+        const result = await model.generateContent(prompt);
+        const response = await result.response;
+        const text = response.text();
+        return text;
+    } catch (error) {
+        console.error("Error generating response from Gemini:", error);
+        return "I'm having a little trouble thinking right now. Please try asking me again in a moment!";
+    }
 }
 
 // Content filter for K-12 appropriateness
