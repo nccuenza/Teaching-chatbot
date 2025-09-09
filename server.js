@@ -146,11 +146,11 @@ process.on('SIGTERM', () => {
    npm init -y
 
 2. Install dependencies:
-   npm install express cors dotenv
+   npm install express cors dotenv @google/generative-ai
 
 3. Create .env file:
    PORT=3000
-   OPENAI_API_KEY=your_api_key_here
+   GEMINI_API_KEY=your_gemini_api_key_here
 
 4. Create public/index.html (see next file)
 
