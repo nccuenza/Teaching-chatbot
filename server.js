@@ -11,6 +11,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+
 // Middleware
 app.use(cors());
 app.use(express.json());
@@ -30,7 +31,7 @@ const GRADE_LEVELS = {
 // Replace the entire old mock function with this new one
 async function generateTeachingResponse(question, gradeLevel, conversationHistory = []) {
     const config = GRADE_LEVELS[gradeLevel] || GRADE_LEVELS['6-8'];
-    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
     // Construct a more detailed prompt for the AI
     const prompt = `You are a friendly and encouraging K-12 teaching assistant for the water cycle.
@@ -110,14 +111,14 @@ app.post('/api/chat', async (req, res) => {
       timestamp: new Date().toISOString()
     });
 
-   } catch (error) {
-    console.error('=== GEMINI API ERROR DEBUG ===');
-    console.error('Error name:', error.name);
-    console.error('Error message:', error.message);
-    console.error('Full error:', error);
-    console.error('API Key exists:', !!process.env.GEMINI_API_KEY);
-    console.error('API Key starts with:', process.env.GEMINI_API_KEY?.substring(0, 10) + '...');
-    console.error('=== END DEBUG ===');
+// ... inside your app.post('/api/chat', ...) route
+  } catch (error) {
+    // Replace the old catch block with this one
+    console.error('An error occurred in the /api/chat route:', error);
+    res.status(500).json({ 
+        error: 'Failed to generate a response from the AI model.',
+        details: error.message 
+    });
   }
 });
 
