@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 require('dotenv').config();
-// +++ Add these two lines +++
+// +++ +++
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 // +++++++++++++++++++++++++++++
@@ -111,9 +111,7 @@ app.post('/api/chat', async (req, res) => {
       timestamp: new Date().toISOString()
     });
 
-// ... inside your app.post('/api/chat', ...) route
   } catch (error) {
-    // Replace the old catch block with this one
     console.error('An error occurred in the /api/chat route:', error);
     res.status(500).json({ 
         error: 'Failed to generate a response from the AI model.',
@@ -149,59 +147,3 @@ process.on('SIGTERM', () => {
   console.log('Server shutting down...');
   process.exit(0);
 });
-
-/* 
-=== SETUP INSTRUCTIONS ===
-
-1. Initialize project:
-   npm init -y
-
-2. Install dependencies:
-   npm install express cors dotenv @google/generative-ai
-
-3. Create .env file:
-   PORT=3000
-   GEMINI_API_KEY=your_gemini_api_key_here
-
-4. Create public/index.html (see next file)
-
-5. Run server:
-   npm start
-
-=== FILE STRUCTURE ===
-k12-teaching-bot/
-├── server.js
-├── package.json
-├── .env
-├── .gitignore
-├── README.md
-├── public/
-│   ├── index.html
-│   ├── style.css
-│   └── script.js
-└── docs/
-    └── API.md
-
-=== PACKAGE.JSON SCRIPTS ===
-Add to your package.json:
-{
-  "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js"
-  }
-}
-
-=== GITIGNORE ===
-node_modules/
-.env
-*.log
-.DS_Store
-
-=== NEXT STEPS ===
-1. Replace mock LLM with real API (OpenAI, Anthropic, etc.)
-2. Add database for persistent conversations
-3. Implement user authentication
-4. Add more sophisticated content filtering
-5. Create subject-specific teaching modules
-6. Add progress tracking for students
-*/
