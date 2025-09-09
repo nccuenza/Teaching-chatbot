@@ -105,9 +105,14 @@ app.post('/api/chat', async (req, res) => {
       timestamp: new Date().toISOString()
     });
 
-  } catch (error) {
-    console.error('Chat error:', error);
-    res.status(500).json({ error: 'Sorry, I had trouble understanding that. Please try again!' });
+  } } catch (error) {
+    console.error('=== GEMINI API ERROR DEBUG ===');
+    console.error('Error name:', error.name);
+    console.error('Error message:', error.message);
+    console.error('Full error:', error);
+    console.error('API Key exists:', !!process.env.GEMINI_API_KEY);
+    console.error('API Key starts with:', process.env.GEMINI_API_KEY?.substring(0, 10) + '...');
+    console.error('=== END DEBUG ===');
   }
 });
 
