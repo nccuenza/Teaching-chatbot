@@ -32,7 +32,7 @@ const chatbotPrompt = `
 // API endpoint for chat
 app.post('/chat', async (req, res) => {
     try {
-        const model = genAI.getGenerativeModel({ model: "gemini-1.0-flash" });
+         const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
         const userMessage = req.body.message;
 
         const chat = model.startChat({
@@ -54,7 +54,7 @@ app.post('/chat', async (req, res) => {
     }
 });
 
-// Start the server
+// Start the server (localerver)
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
