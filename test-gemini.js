@@ -1,4 +1,4 @@
-// test-gemini.js - Test your Gemini API connection
+// test-gemini.js - To test Gemini API connection
 require('dotenv').config();
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 
@@ -45,8 +45,3 @@ async function testGeminiAPI() {
 }
 
 testGeminiAPI();
-
-// Instructions:
-// 1. Save this as 'test-gemini.js' in your project folder
-// 2. Run: node test-gemini.js
-// 3. This will test if your Gemini API key works
