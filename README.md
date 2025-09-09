@@ -1,10 +1,15 @@
 K-12 Teaching Assistant Chatbot
-This is a web-based AI chatbot designed to act as a friendly and knowledgeable teaching assistant for K-12 students. It uses the Google Gemini API to provide age-appropriate explanations on various subjects. The front-end is built with simple HTML, CSS, and JavaScript, and the back-end is powered by Node.js and Express.
+This is a web-based AI chatbot designed to act as a friendly and knowledgeable teaching assistant for K-12 students. It uses the Google Gemini API to provide age-appropriate explanations on various subjects.
 
-⚠️ Project Status: In Development
-This application is currently functional when run on a local machine but is not yet successfully deployed to a live server.
+🚀 Live Demo
+You can interact with the live version of the chatbot here:
 
-The chatbot connects to the Google Gemini API and serves the front-end correctly on localhost. The goal is to deploy it to a hosting service like Render for public access.
+https://teaching-chatbot-5i99.onrender.com/
+
+✅ Project Status: Deployed
+This application has been successfully deployed and is live on Render.
+
+The chatbot connects to the Google Gemini API, serves the front-end, and is publicly accessible.
 
 Features
 AI-Powered Responses: Integrates with the Google Gemini API to generate dynamic, educational content.
@@ -29,7 +34,7 @@ Frontend: HTML, CSS, vanilla JavaScript
 Dependencies: dotenv for environment variables, cors for resource sharing.
 
 Prerequisites
-Before you can run this project, you need to have the following installed on your machine:
+Before you can run this project locally, you need to have the following installed on your machine:
 
 Node.js (which includes npm, the Node package manager). You can download it from the official website.
 
@@ -43,12 +48,14 @@ git clone <your-github-repository-url>
 cd <your-project-directory>
 
 
+
 Alternatively, you can download the project files as a ZIP and extract them.
 
 2. Install Dependencies
 The project relies on several Node.js packages. Open a terminal in the project's root directory and run the following command to install them. This includes @google/generative-ai, express, and other necessary libraries.
 
 npm install
+
 
 
 3. Set Up Your Environment Variables
@@ -65,6 +72,7 @@ PORT=3000
 GEMINI_API_KEY=your_gemini_api_key_here
 
 
+
 How to get a Gemini API Key:
 
 Visit Google AI Studio.
@@ -79,10 +87,12 @@ Once the dependencies are installed and your API key is set, you can start the s
 npm start
 
 
+
 You should see a message in your terminal indicating that the server is running:
 
 🎓 K-12 Teaching Chatbot running on http://localhost:3000
 📚 Ready to help students learn!
+
 
 
 5. Open in Your Browser
