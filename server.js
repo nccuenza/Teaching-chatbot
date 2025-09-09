@@ -105,7 +105,7 @@ app.post('/api/chat', async (req, res) => {
       timestamp: new Date().toISOString()
     });
 
-  } } catch (error) {
+   } catch (error) {
     console.error('=== GEMINI API ERROR DEBUG ===');
     console.error('Error name:', error.name);
     console.error('Error message:', error.message);
